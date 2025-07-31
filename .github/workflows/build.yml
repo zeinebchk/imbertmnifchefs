@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches: [ main ]
@@ -9,13 +8,13 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Get Date
         id: get-date
         run: |
-          echo "date=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
+          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+        shell: bash
 
       - name: Cache Buildozer global directory
         uses: actions/cache@v2
@@ -23,7 +22,7 @@ jobs:
           path: .buildozer_global
           key: buildozer-global-${{ hashFiles('buildozer.spec') }}
 
-      - name: Cache Buildozer build directory
+      - name: Cache Buildozer directory
         uses: actions/cache@v2
         with:
           path: .buildozer
@@ -36,8 +35,8 @@ jobs:
           command: buildozer android debug
           buildozer_version: stable
 
-      - name: Upload APK
+      - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: app-debug.apk
-          path: bin/*.apk
+          name: package
+          path: ${{ steps.buildozer.outputs.filename }}
