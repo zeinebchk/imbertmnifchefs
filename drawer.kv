@@ -1,0 +1,113 @@
+<LaunchOf>:
+    orientation: 'horizontal'
+
+    # --- Drawer Menu avec animation ---
+    BoxLayout:
+        id: drawer
+        orientation: 'vertical'
+        size_hint_x: None
+        width: self.parent.width * 0.3 if root.menu_open else 0
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1  # Fond blanc
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # Espace vide en haut
+        Widget:
+            size_hint_y: None
+            height: dp(40)
+
+        # Conteneur pour centrer verticalement les boutons
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: dp(10)
+            pos_hint: {'center_y': 0.5}  # centre vertical
+
+            Button:
+                text: "🏠  Accueil"
+                font_size: '16sp'
+                color: 0, 0, 0, 1
+                background_normal: ''
+                background_color: 1, 1, 1, 1
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+                size_hint_y: None
+                height: dp(60)
+                on_release: root.select_option("Accueil")
+
+            Widget:
+                size_hint_y: None
+                height: 1
+                canvas:
+                    Color:
+                        rgba: 0.85, 0.85, 0.85, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Button:
+                text: "👤  Profil"
+                font_size: '16sp'
+                color: 0, 0, 0, 1
+                background_normal: ''
+                background_color: 1, 1, 1, 1
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+                size_hint_y: None
+                height: dp(60)
+                on_release: root.select_option("Profil")
+
+            Widget:
+                size_hint_y: None
+                height: 1
+                canvas:
+                    Color:
+                        rgba: 0.85, 0.85, 0.85, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Button:
+                text: "🚪  Déconnexion"
+                font_size: '16sp'
+                color: 0, 0, 0, 1
+                background_normal: ''
+                background_color: 1, 1, 1, 1
+                halign: 'center'
+                valign: 'middle'
+                text_size: self.size
+                size_hint_y: None
+                height: dp(60)
+                on_release: root.select_option("Déconnexion")
+
+    # --- Contenu principal ---
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout:
+            size_hint_y: None
+            height: '50dp'
+            padding: 10
+            spacing: 10
+
+            Button:
+                text: "☰"
+                size_hint_x: None
+                width: 50
+                on_release: root.toggle_menu()
+
+            Label:
+                id: main_label
+                text: "Bienvenue"
+                font_size: '18sp'
+                color: 0, 0, 0, 1
+
+        Label:
+            text: "Contenu de la page"
+            color: 0, 0, 0, 1

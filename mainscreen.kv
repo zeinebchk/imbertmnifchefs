@@ -1,0 +1,93 @@
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: "#e7e4c0"
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    ripple_color: "#c5bdd2"
+    selected_color: "#0c6c4d"
+
+<DrawerLabelItem@MDNavigationDrawerItem>
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    focus_behavior: False
+    selected_color: "#4a4939"
+    _no_ripple_effect: True
+
+<MainScreen>:
+    MDNavigationLayout:
+
+        MDScreenManager:
+            id: screen_manager
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+            radius: (0, dp(16), dp(16), 0)
+
+            MDNavigationDrawerMenu:
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: dp(12)
+                    spacing: dp(10)
+
+                    FitImage:
+                        source: "logo.png"  # Chemin vers ton image
+                        size_hint: None, None
+                        size: dp(150), dp(150)
+                        pos_hint: {"center_x": 0.5}
+                        radius: [dp(40),]
+
+                    MDNavigationDrawerHeader:
+                        title: "Bienvenue"
+                        title_color: "#4a4939"
+                        text: "Utilisateur connecté"
+                        spacing: "4dp"
+                        padding: "12dp", 0, 0, "56dp"
+
+                MDNavigationDrawerLabel:
+                    text: "Navigation"
+
+                DrawerClickableItem:
+                    icon: "arrow-right-drop-circle"
+                    icon_color: 0.133, 0.427, 0.408, 1
+                    text: "lancement"
+                    text_color:0.133, 0.427, 0.408, 1
+                    on_release:
+                        root.ids.screen_manager.current = "launch"
+                        nav_drawer.set_state("close")
+
+                DrawerClickableItem:
+                    icon: "autorenew"
+                    icon_color: 0.133, 0.427, 0.408, 1
+                    text: "En cours"
+                    text_color:0.133, 0.427, 0.408, 1
+                    on_release:
+                        root.go_to_in_progress_of()
+                        nav_drawer.set_state("close")
+                DrawerClickableItem:
+                    icon: "check-circle"
+                    icon_color: 0.133, 0.427, 0.408, 1
+                    text: "Termines"
+                    text_color:0.133, 0.427, 0.408, 1
+                    on_release:
+                        root.go_to_done_of()
+                        nav_drawer.set_state("close")
+                DrawerClickableItem:
+                    icon: "account-group"
+                    icon_color: 0.133, 0.427, 0.408, 1
+                    text: "Absences"
+                    text_color:0.133, 0.427, 0.408, 1
+                    on_release:
+                        root.go_to_absence()
+                        nav_drawer.set_state("close")
+                DrawerClickableItem:
+                    icon: "logout"
+                    icon_color: 0.133, 0.427, 0.408, 1
+                    text: "Déconnexion"
+                    text_color:0.133, 0.427, 0.408, 1
+                    on_release:
+                        root.on_logout()
+                        nav_drawer.set_state("close")
+

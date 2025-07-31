@@ -1,0 +1,54 @@
+<LaunchScreen>:
+    name: "launch"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(10)
+        padding: dp(20)
+
+        MDTopAppBar:
+            title: "Lancement"
+            elevation: 2
+            md_bg_color: 0.133, 0.427, 0.408, 1
+            left_action_items: [["menu", lambda x: app.root.ids.main_screen.ids.nav_drawer.set_state("toggle")]]
+        MDRaisedButton:
+            text: "Changer modèle"
+            size_hint: None, None
+            size: "150dp", "48dp"
+            pos_hint: {"left": 1, "top": 1}
+            md_bg_color: 0.133, 0.427, 0.408, 1
+            on_release: root.show_dialog()  # À adapter avec votre fonction
+        MDLabel:
+            id: objectif_id
+            text: "Titre de l’objectif"
+            font_style: "H5"  # Choix parmi les styles prédéfinis : H1, H2, H3, H4, H5, H6, Subtitle1, Subtitle2, Body1, Body2
+            halign: "center"  # Optionnel : centrer le texte
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1  # Noir
+            bold: True  # Appliquer si tu veux forcer du gras (optionnel selon `font_style`)
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+
+
+
+        MDRaisedButton:
+            text: "Lancer of"
+            size_hint: None, None
+            size: "150dp", "48dp"
+            pos_hint: {"right": 1, "top": 1}
+            md_bg_color: 0.839, 0.584, 0.357, 1
+            on_release: root.launchOF()  # À adapter avec votre fonction
+        ScrollView:
+            canvas.before:
+                Color:
+                    rgba: 0.95, 0.95, 0.95, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            MDBoxLayout:
+                id: table_container
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: dp(10)

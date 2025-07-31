@@ -1,0 +1,53 @@
+<AbsenceScreen>:
+    name: "absence_screen"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(10)
+        padding: dp(20)
+
+        # Barre supérieure
+        MDTopAppBar:
+            title: "Ordre de fabrications terminés"
+            elevation: 2
+            md_bg_color: 0.133, 0.427, 0.408, 1
+            left_action_items: [["menu", lambda x: app.root.ids.main_screen.ids.nav_drawer.set_state("toggle")]]
+
+        # Titre de l'objectif
+        MDLabel:
+            id: objectif_id
+            text: "Liste de présence"
+            font_style: "H5"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: 0, 0, 0, 1
+            bold: True
+            size_hint_y: None
+            height: self.texture_size[1] + dp(10)
+
+        # Barre de recherche
+        MDTextField:
+            id: search_field
+            hint_text: "Rechercher un ouvrier..."
+            mode: "rectangle"
+            size_hint_x: 1
+            icon_right: "magnify"
+            helper_text: "Tapez pour rechercher"
+            helper_text_mode: "on_focus"
+            on_text: root.filter_table(self.text)
+
+        # Tableau des données
+        ScrollView:
+            canvas.before:
+                Color:
+                    rgba: 0.95, 0.95, 0.95, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            MDBoxLayout:
+                id: table_container
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: dp(10)
